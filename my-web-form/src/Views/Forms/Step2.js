@@ -115,9 +115,7 @@ const Step2 = (props) => {
         type="text"
         {...register("IDcard")}
         onChange={(e) => {
-          handleChangeOfDocument(e);
-        }}
-      >
+          handleChangeOfDocument(e);}}>
         <option value="">Typ dokumentu tożsamości:</option>
         <option value="id">Dowód osobisty</option>
         <option value="passport">Paszport</option>

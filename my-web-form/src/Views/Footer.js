@@ -34,8 +34,7 @@ useEffect(() => {
     return `${minutes}:${padTime(seconds)}`;
   } else{
     return "Przerwanie wypełniania formularza z powodu przekroczenia czasu oczekiwania";
-  }
-  };
+  }};
 
   const timerTime = () => {
     setTimer((prev) => prev - 1);

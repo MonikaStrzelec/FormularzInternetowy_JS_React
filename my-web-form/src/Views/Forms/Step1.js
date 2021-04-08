@@ -22,6 +22,7 @@ const Step1 = (props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Step 1</h2>
+      
       <label> Imię:</label>
       <input
         {...register("firstName", { required: true, maxLength: 50 })}
@@ -29,6 +30,7 @@ const Step1 = (props) => {
         name="firstName"
       />
       {errors.firstName && "To pole jest wymagane"}
+
       <label> Nazwisko:</label>
       <input
         {...register("name", { required: true, maxLength: 60 })}
