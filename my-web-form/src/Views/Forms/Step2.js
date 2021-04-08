@@ -5,23 +5,16 @@ import { useStateMachine } from "little-state-machine";
 import updateAction from "./updateAction";
 
 const Step2 = (props) => {
-  const {
-    register,
-    handleSubmit,
-   // formState: { errors },
-    getValues,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   let typeOfDucumentText = "";
 
   const { actions, state } = useStateMachine({ updateAction });
 
- // const onError = (errors, e) => console.log(errors, e);
-
   const onSubmit = (data) => {
     console.log(data);
     actions.updateAction(data);
-    props.history.push("./step3"); //zapisywanie i przejscie dalej
+    props.history.push("./step3");
   };
 
   const [idCard, setIdCard] = useState(false);
@@ -61,11 +54,11 @@ const Step2 = (props) => {
   };
 
   const handleChangeOfDocument = (e) => {
-        let valueOfDocument = e.target.value;
-        typeOfDucumentText = typeOfIdentyficationDocument(valueOfDocument);
-        state.documentType = valueOfDocument;
-        setIdCard(valueOfDocument);
-  }
+    let valueOfDocument = e.target.value;
+    typeOfDucumentText = typeOfIdentyficationDocument(valueOfDocument);
+    state.documentType = valueOfDocument;
+    setIdCard(valueOfDocument);
+  };
 
   const handleBirthDate = (e) => {
     const pesel = e.target.value;
@@ -92,13 +85,11 @@ const Step2 = (props) => {
     if (idCard === "passport") return "Numer paszportu";
   };
 
-  const handleChangeOfNumberDocument = (e) =>{
-      let value = e.target.value;
-      setIdCard = value;
-      state.numbrID = value;
-  }
-
-  // handleSubmit: Ta funkcja otrzyma dane formularza, jeśli walidacja formularza zakończy się pomyślnie.
+  const handleChangeOfNumberDocument = (e) => {
+    let value = e.target.value;
+    setIdCard = value;
+    state.numbrID = value;
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,28 +101,13 @@ const Step2 = (props) => {
         type="number"
         name="PESEL"
         {...register("PESEL")}
-        //onChangeText={(state) => handleBirthDate(state.PESEL)}
         onChange={(e) => {
           handleBirthDate(e);
         }}
-        // onChange={(e) => {
-        //   handleBirthDate(e);}}
       />
-     
 
       <label>Data urodzenia:</label>
-      <input
-        //  type="date"
-        {...register("brithDate")}
-        value={birthDate}
-        name="birthDate"
-        //onChange={e => setValue("birthDate", e.target.value)}
-        //onChange={(brithDate) => setBirthDate(birthDate)}
-        // onChange={(e) => {
-        //   console.log("data urodzenia change === " + e.target.value);
-        //   setBirthDate(birthDate);
-        // }}
-      />
+      <input {...register("brithDate")} value={birthDate} name="birthDate" />
 
       <label>Typ dokumentu tożsamości:</label>
       <select
@@ -139,13 +115,8 @@ const Step2 = (props) => {
         type="text"
         {...register("IDcard")}
         onChange={(e) => {
-          //setIdCard(!idCard);
           handleChangeOfDocument(e);
-          //handleChange(e);
         }}
-        // state={(e) => {
-        //   setValue(!value);
-        // }}
       >
         <option value="">Typ dokumentu tożsamości:</option>
         <option value="id">Dowód osobisty</option>
@@ -159,25 +130,6 @@ const Step2 = (props) => {
         name="numbrID"
         onChange={(e) => handleChangeOfNumberDocument(e)}
       />
-
-      {/* <label value="numbrID">{typeOfDocumentText()}</label>
-			<input
-				type="text"
-				name="numbrID"
-				placeholder={typeOfDocumentText()}
-				{...register("numbrID")}
-                defaultValue={state.numbrID}
-			/> */}
-      {/* {errors.numbrID && "Twój pesel jest za długi"} */}
-
-      <button
-        type="button"
-        onClick={() => {
-          alert(JSON.stringify(state));
-        }}
-      >
-        Get Values
-      </button>
 
       <input type="submit" value="Następny krok" />
     </form>
